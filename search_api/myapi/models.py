@@ -11,6 +11,8 @@ class Products(models.Model):
     description = models.TextField()
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/',blank=True,null=True)
+    rating = models.FloatField(default=0)
+    rating_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
