@@ -12,7 +12,7 @@ def home(req):
     return render(req,'myapi/home.html')
 class ProductView(APIView):
   def get(self, request, *args, **kwargs):
-        products = Products.objects.all()
+        products = Products.objects.select_related('category').all()
         serializer = ProductSerializer(products, many=True,context={'request': request})  
         return Response(serializer.data, status=status.HTTP_200_OK)
 class ProductSearchAPI(APIView):
@@ -32,14 +32,16 @@ def send_api(req):
         search = req.POST.get('q')
         search = search.strip() if search else None
         print(search) 
-        url = f'http://127.0.0.1:8000/api/search/?q={search}'
+        url = f'http://relaxing-initially-sawfly.ngrok-free.app/api/search/?q={search}'
         print(url)
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
             if data ==[]:
                 data = ['ไม่พบข้อมูลที่ม่านค้นหากรุณาค้นหาใหม่อีกครั้ง']
-            print(data)
-        if data:
-            return render(req,'myapi/home.html',{'data':data})
+                print(data)
+            else:
+                return render(req,'myapi/home.html',{'data':data})
+        else:
+            redirect('home')
     return render(req,'myapi/home.html')
