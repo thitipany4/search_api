@@ -6,7 +6,7 @@ class Category(models.Model):
         return f'{self.name}'
 
 class Products(models.Model):
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500,db_index=True)
     price = models.IntegerField(default=0)
     description = models.TextField()
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
