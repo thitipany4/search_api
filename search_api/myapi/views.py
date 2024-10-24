@@ -46,13 +46,18 @@ def send_api(req):
         url = f'http://relaxing-initially-sawfly.ngrok-free.app/api/search/?q={search}'
         print(url)
         response = requests.get(url)
+        print('response',response)
+        data = ''
         if response.status_code == 200:
             data = response.json()
-            if data ==[]:
+            print('data',data)
+            if not data :
                 data = ['ไม่พบข้อมูลที่ม่านค้นหากรุณาค้นหาใหม่อีกครั้ง']
                 print(data)
             else:
-                return render(req,'myapi/home.html',{'data':data})
+                pass
+            return render(req,'myapi/home.html',{'data':data})
         else:
-            redirect('home')
+            data = ['เกิดข้อผิดพลาดเกี่ยวกับการส่ง request กรุณาตรวจสอบ']
+            return render(req,'myapi/home.html',{'data':data})
     return render(req,'myapi/home.html')
