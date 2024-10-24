@@ -7,9 +7,20 @@ from myapi.models import Products
 from rest_framework.response import Response
 from django.db.models import Q
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 # Create your views here.
 def home(req):
     return render(req,'myapi/home.html')
+# class ProductView(APIView):
+#     def get(self, request, *args, **kwargs):
+#         products = Products.objects.select_related('category').all()
+#         # ใช้ paginator สำหรับแบ่งหน้า
+#         paginator = PageNumberPagination()
+#         result_page = paginator.paginate_queryset(products, request)
+#         serializer = ProductSerializer(result_page, many=True, context={'request': request})
+#         # ส่งข้อมูลที่แบ่งหน้าแล้ว
+#         return paginator.get_paginated_response(serializer.data)
+
 class ProductView(APIView):
   def get(self, request, *args, **kwargs):
         products = Products.objects.select_related('category').all()

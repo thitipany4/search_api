@@ -61,8 +61,8 @@ REST_FRAMEWORK = {
         'anon': '1000/day',  # จำกัดผู้ใช้ที่ไม่ authenticated ให้เข้าถึงได้ 100 ครั้งต่อวัน
         'user': '1000/day',  # จำกัดผู้ใช้ที่ authenticated ให้เข้าถึงได้ 1000 ครั้งต่อวัน
     },
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 2,
 }
 
 ROOT_URLCONF = "search_api.urls"
